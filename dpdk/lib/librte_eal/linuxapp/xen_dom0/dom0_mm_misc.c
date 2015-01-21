@@ -123,7 +123,7 @@ store_memsize(struct device *dev, struct device_attribute *attr,
 	int err = 0;
 	unsigned long mem_size;
 
-	if (0 != strict_strtoul(buf, 0, &mem_size))
+	if (0 != kstrtoul(buf, 0, &mem_size))
 		return  -EINVAL;
 
 	mutex_lock(&dom0_dev.data_lock);

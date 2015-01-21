@@ -67,6 +67,10 @@
  * KNI name is part of memzone name.
  */
 #define RTE_KNI_NAMESIZE 32
+#ifndef RTE_CACHE_LINE_SIZE
+#define RTE_CACHE_LINE_SIZE 64                  /**< Cache line size. */
+#endif
+
 
 /*
  * Request id.
@@ -117,7 +121,7 @@ struct rte_kni_mbuf {
 	uint16_t data_len;      /**< Amount of data in segment buffer. */
 	char pad2[2];
 	uint16_t pkt_len;       /**< Total pkt len: sum of all segment data_len. */
-} __attribute__((__aligned__(64)));
+}  __attribute__((__aligned__(RTE_CACHE_LINE_SIZE)));
 
 /*
  * Struct used to create a KNI device. Passed to the kernel in IOCTL call

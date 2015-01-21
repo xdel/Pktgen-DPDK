@@ -345,7 +345,7 @@ kni_ioctl_create(unsigned int ioctl_num, unsigned long ioctl_param)
 	up_read(&kni_list_lock);
 
 	net_dev = alloc_netdev(sizeof(struct kni_dev), dev_info.name,
-							kni_net_init);
+					NET_NAME_UNKNOWN, kni_net_init);
 	if (net_dev == NULL) {
 		KNI_ERR("error allocating device \"%s\"\n", dev_info.name);
 		return -EBUSY;
